@@ -15,6 +15,7 @@ npm run skill:discover      # Generate project from domain
 npm run db:init            # Initialize database
 npm run cli                # Test skills interactively
 npm run migrate:promote    # Promote field to column
+npm run ui:init            # Bootstrap React UI (or let agent do it)
 npm run dev                # Start development
 ```
 
@@ -94,16 +95,38 @@ CREATE TABLE entities (
 
 ## File Structure
 ```
-├── .claude/skills/          # Skill definitions
+├── .claude/skills/          # Skill definitions (including ui-bootstrap.md)
 ├── src/
 │   ├── skills/executor.ts   # Skill engine (reusable)
 │   ├── schema/types.ts      # TypeScript types
 │   ├── data/init.ts         # Database setup
-│   └── scripts/             # Automation
+│   └── scripts/             # Automation (including init-ui.ts)
+├── templates/ui/            # React + Sailwind UI template
 ├── docs/                    # Guides
 ├── examples/                # Reference implementations
-└── templates/               # Blank templates
+├── AGENTS.md                # AI agent UI development guide
+└── ui/                      # (Created by ui-bootstrap skill)
 ```
+
+## UI Development (Optional)
+
+**Agent-Driven (Recommended):**
+Just ask your agent to build UI pages - it will automatically run the `ui-bootstrap` skill if needed.
+
+**Manual:**
+```bash
+npm run ui:init    # Bootstrap React UI
+cd ui && npm run dev  # Start at localhost:5173
+```
+
+**What you get:**
+- React 19 + TypeScript + Vite
+- Sailwind components (SAIL-like)
+- Aurora color palette
+- API client pattern
+- Example pages
+
+See `AGENTS.md` for complete UI development guidance.
 
 ## Testing Skills
 ```bash

@@ -67,6 +67,36 @@ npm run db:create-table YourEntity
 
 Modify skills in `.claude/skills/` and test immediately.
 
+## UI Setup (Optional)
+
+The template includes a pre-configured React UI with Sailwind components.
+
+**Skill-First Approach (Recommended):**
+Simply ask your AI agent to build UI pages - it will automatically bootstrap the UI when needed using the `ui-bootstrap` skill.
+
+**Manual Setup (Alternative):**
+```bash
+# Initialize the UI manually
+npm run ui:init
+
+# Start the UI dev server
+cd ui
+npm run dev
+```
+
+The UI template includes:
+- React 19 + TypeScript + Vite
+- Sailwind component library (SAIL-like components)
+- Aurora color palette pre-configured
+- API client pattern for backend integration
+- Example pages demonstrating common patterns
+
+**Requirements:**
+- Backend running on `http://localhost:3000`
+- UI dev server runs on `http://localhost:5173`
+
+See [ui/README.md](templates/ui/README.md) and [AGENTS.md](AGENTS.md) for detailed UI development guidance.
+
 ## Progressive Formalization
 
 ### Phase 1: Discovery (Weeks 1-3)
@@ -97,14 +127,17 @@ This generates and optionally applies:
 │   └── skills/              # Skill definitions (markdown)
 │       ├── domain-discovery.md
 │       ├── schema-evolution.md
+│       ├── ui-bootstrap.md  # Auto-initialize UI
 │       └── [your-skills].md
 ├── src/
 │   ├── skills/              # Skill executor (reusable)
 │   ├── schema/              # TypeScript types
 │   ├── data/                # Database
 │   └── migrations/          # Generated migrations
-├── templates/               # Blank templates
-└── examples/                # Reference implementation
+├── templates/
+│   └── ui/                  # UI template (React + Sailwind)
+├── examples/                # Reference implementation
+└── AGENTS.md                # AI agent guidance for UI development
 ```
 
 ## Core Concepts
@@ -125,10 +158,11 @@ See `examples/ticket-system/` for a complete reference implementation.
 ## Next Steps
 
 1. Run `npm run skill:discover` to generate your first skills
-2. Test them with `npm run cli` or build a UI
-3. Iterate on skills until behavior feels right
-4. Promote stable fields with `npm run migrate:promote`
-5. Repeat
+2. Test them with `npm run cli`
+3. (Optional) Ask your agent to build UI pages - it will bootstrap the UI automatically
+4. Iterate on skills until behavior feels right
+5. Promote stable fields with `npm run migrate:promote`
+6. Repeat
 
 ## Learn More
 

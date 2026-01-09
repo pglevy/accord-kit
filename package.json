@@ -9,7 +9,8 @@
     "db:init": "tsx src/data/init.ts",
     "db:create-table": "tsx src/scripts/create-table.ts",
     "skill:discover": "tsx src/scripts/discover-domain.ts",
-    "migrate:promote": "tsx src/scripts/promote-field.ts"
+    "migrate:promote": "tsx src/scripts/promote-field.ts",
+    "ui:init": "tsx src/scripts/init-ui.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",

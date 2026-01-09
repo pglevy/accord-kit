@@ -7,22 +7,26 @@
 - **Database Setup** (`src/data/init.ts`) - SQLite with flexible schema
 - **CLI Interface** (`src/cli/index.ts`) - Interactive skill testing
 - **TypeScript Types** (`src/schema/types.ts`) - Type safety foundation
+- **UI Template** (`templates/ui/`) - React + Sailwind component library with Aurora theme
 
 ### 2. Meta-Skills
 - **Domain Discovery** (`.claude/skills/domain-discovery.md`) - Generates initial project setup
 - **Schema Evolution** (`.claude/skills/schema-evolution.md`) - Automates field promotion
+- **UI Bootstrap** (`.claude/skills/ui-bootstrap.md`) - Automatically initializes React UI when needed
 
 ### 3. Automation Scripts
 - `npm run skill:discover` - Interview-based project generation
 - `npm run migrate:promote` - Field promotion with preview and confirmation
 - `npm run cli` - Interactive skill testing
 - `npm run db:init` - Database initialization
+- `npm run ui:init` - Initialize React UI from template
 
 ### 4. Documentation
 - **Getting Started** (`docs/getting-started.md`) - Complete onboarding guide
 - **Progressive Formalization** (`docs/progressive-formalization.md`) - The methodology
 - **Writing Skills** (`docs/writing-skills.md`) - Skill authoring guide
 - **Migrations** (`docs/migrations.md`) - Database evolution guide
+- **AI Agent Guidance** (`AGENTS.md`) - Sailwind UI development reference for LLMs
 
 ### 5. Reference Implementation
 - **Ticket System** (`examples/ticket-system/`) - Complete working example
@@ -117,12 +121,14 @@ No waiting for backend changes.
 | CLI Interface | ✅ | - |
 | Database Init | ✅ | - |
 | Migration Scripts | ✅ | - |
+| UI Template | ✅ | Pages & API types |
+| AGENTS.md | ✅ | - |
 | Documentation | ✅ | Domain examples |
 | Schema Types | - | ✅ |
 | Business Skills | - | ✅ |
 | Database Tables | - | ✅ |
 
-**80% reusable, 20% domain-specific**
+**85% reusable, 15% domain-specific**
 
 ## Adaptation Checklist
 
@@ -134,7 +140,8 @@ To adapt for a new domain:
 - [ ] Customize skill logic
 - [ ] Update TypeScript types
 - [ ] Test via CLI
-- [ ] Build interface (UI/API)
+- [ ] (Optional) Run `npm run ui:init` to set up UI
+- [ ] Customize UI pages and API types
 - [ ] Promote stable fields
 - [ ] Add constraints as needed
 
@@ -155,13 +162,20 @@ You're using this well when:
 
 This template doesn't include:
 - Authentication/authorization
-- API server (Express/Fastify)
-- UI framework (React/Vue)
+- API server (Express/Fastify) - only UI and skills backend
 - Deployment configuration
 - Monitoring/logging
 - Testing framework
 
 These are intentionally left out - add what you need for your domain.
+
+## What IS Included (New!)
+
+- **UI Template**: React + Sailwind components with Aurora theme
+  - Pre-configured Vite + TypeScript setup
+  - Example pages demonstrating common patterns
+  - API client layer for backend integration
+  - AI agent guidance (AGENTS.md) for LLM-assisted development
 
 ## Philosophy
 
