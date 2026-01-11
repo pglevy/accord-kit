@@ -41,8 +41,14 @@ export default function Home() {
 
           <div className="space-y-3">
             <ButtonWidget
-              label="View Example Form"
+              label="View Tickets (Schema-First Example)"
               style="SOLID"
+              color="ACCENT"
+              onClick={() => navigate('/tickets')}
+            />
+            <ButtonWidget
+              label="View Example Form"
+              style="OUTLINE"
               color="ACCENT"
               onClick={() => navigate('/example-form')}
             />

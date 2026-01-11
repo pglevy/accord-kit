@@ -1,171 +1,335 @@
-# Skills-First Starter Template
+# Schema-First Starter Template
 
-A template for building applications using **Skills-First development** - where specifications emerge from usage rather than being defined upfront.
+**Keep your API contract and concept model synchronized with your prototypes.**
 
-## What is Skills-First?
+## The Problem
 
-Traditional development:
+When building prototypes:
+1. 🎨 **Product teams** build sophisticated, interactive prototypes
+2. 📹 **Developers** receive videos and prototype code
+3. 🔍 **Developers** must reverse-engineer the implied API contract
+4. 📝 **Schema gets documented** after the fact (if at all)
+5. ⚠️ **Misalignment** between prototype and implementation
+
+Result: **Long translation time from prototype to production API**
+
+## The Solution
+
+**Maintain the contract layer as you prototype:**
+
 ```
-Requirements → Detailed Spec → Implementation → Testing
-    (rigid)   →    (rigid)    →    (rigid)     → (validate rigidity)
+┌─────────────────────────────────────────┐
+│  UI Prototypes (React/etc)              │ ← Build here
+├─────────────────────────────────────────┤
+│  API Contract (OpenAPI)                 │ ← Skills maintain
+├─────────────────────────────────────────┤
+│  Concept Model (domain + behavior docs) │ ← Skills maintain
+├─────────────────────────────────────────┤
+│  Types & Mock API (generated)           │ ← Generated
+└─────────────────────────────────────────┘
 ```
 
-Skills-First development:
-```
-Intent → Skills (flexible) → Usage → Refinement → Hardening
-(fuzzy) → (executable)     → (learning) → (progressive) → (selective rigidity)
-```
+### How It Works
 
-**Key difference:** Behavior is discovered through interaction, not defined upfront.
+As your prototype evolves, **AI skills automatically keep your API schema and concept model in sync**:
+
+1. **Build prototype**: Add features using regular React/TypeScript
+2. **AI detects changes**: "I see you added a priority field"
+3. **AI proposes schema update**: Shows exact OpenAPI changes needed
+4. **You approve**: Quick review and approval
+5. **AI updates artifacts**: Schema → concept docs → types all synchronized
+6. **Keep prototyping**: Contract stays aligned automatically
+
+### What Developers Receive
+
+Instead of reverse-engineering your prototype, developers get:
+
+- ✅ **Complete OpenAPI schema** defining the exact API contract
+- ✅ **Domain model** explaining entities, relationships, and business rules
+- ✅ **Behavior model** documenting workflows and state transitions
+- ✅ **Evolution log** showing how requirements emerged and why
+- ✅ **Working prototype** already using the real API shape
+
+**Result:** Shorter time from prototype to production API.
+
+---
 
 ## Quick Start
 
+### 1. Clone and Explore the Example
+
 ```bash
-# Install dependencies
+# Clone this repo
+git clone <your-repo-url>
+cd skills-first-starter
+
+# Install dependencies for UI prototype
+cd templates/ui
 npm install
 
-# Set up environment
-cp .env.example .env
-# Add your ANTHROPIC_API_KEY to .env
-
-# Initialize your database
-npm run db:init
-
-# Start development
+# Start the example
 npm run dev
 ```
 
-## 5-Minute Adaptation Guide
+Visit [http://localhost:5173/tickets](http://localhost:5173/tickets) to see the ticketing system example.
 
-### 1. Define Your Domain (2 minutes)
+### 2. Review the Artifacts
 
-Edit `.claude/skills/domain-discovery.md` and run:
-```bash
-npm run skill:discover
-```
+**API Contract:**
+- [schema/api-contract.yaml](./schema/api-contract.yaml) - OpenAPI 3.1 schema defining Ticket API
 
-This will interview you about your domain and generate initial skills.
+**Concept Model:**
+- [concept-model/domain-model.md](./concept-model/domain-model.md) - Ticket entity, attributes, business rules
+- [concept-model/behavior-model.md](./concept-model/behavior-model.md) - Workflows and state transitions
 
-### 2. Update Schema Types (1 minute)
+**Generated Artifacts:**
+- [api/types/index.ts](./api/types/index.ts) - TypeScript types from schema
+- [api/mock-server/tickets.ts](./api/mock-server/tickets.ts) - Mock API implementing the contract
 
-Edit `src/schema/types.ts` with your aspirational data model:
-```typescript
-interface YourEntity {
-  id: number;
-  // Fields you want eventually
-  skill_data: Record<string, any>;  // Flexible overflow
-}
-```
+**Prototype:**
+- [templates/ui/src/pages/tickets.tsx](./templates/ui/src/pages/tickets.tsx) - React UI using generated types
 
-### 3. Create Initial Database (1 minute)
+### 3. Try Making a Change
 
-```bash
-npm run db:create-table YourEntity
-```
+Let's add a priority field to tickets:
 
-### 4. Start Building (1 minute)
+**Step 1: Update the Prototype**
 
-Modify skills in `.claude/skills/` and test immediately.
+Edit [templates/ui/src/pages/tickets.tsx](./templates/ui/src/pages/tickets.tsx) and add a priority dropdown to the create form.
 
-## UI Setup (Optional)
+**Step 2: Run Schema Evolution**
 
-The template includes a pre-configured React UI with Sailwind components.
+In Claude Code, say:
+> "I added a priority field to the ticket form. Can you update the schema?"
 
-**Skill-First Approach (Recommended):**
-Simply ask your AI agent to build UI pages - it will automatically bootstrap the UI when needed using the `ui-bootstrap` skill.
+Or explicitly invoke:
+> `/schema-evolution` Add priority field to tickets
 
-**Manual Setup (Alternative):**
-```bash
-# Initialize the UI manually
-npm run ui:init
+The AI will:
+- Analyze the change
+- Propose schema updates (adding priority enum)
+- Update [schema/api-contract.yaml](./schema/api-contract.yaml)
+- Log the change in [schema/evolution-log.md](./schema/evolution-log.md)
 
-# Start the UI dev server
-cd ui
-npm run dev
-```
+**Step 3: Sync Concept Model**
 
-The UI template includes:
-- React 19 + TypeScript + Vite
-- Sailwind component library (SAIL-like components)
-- Aurora color palette pre-configured
-- API client pattern for backend integration
-- Example pages demonstrating common patterns
+Say:
+> "Update the concept model for the priority field"
 
-**Requirements:**
-- Backend running on `http://localhost:3000`
-- UI dev server runs on `http://localhost:5173`
+Or invoke:
+> `/concept-sync` Update concept model for priority
 
-See [ui/README.md](templates/ui/README.md) and [AGENTS.md](AGENTS.md) for detailed UI development guidance.
+The AI will:
+- Add priority to domain-model.md
+- Update business rules
+- Add to domain vocabulary
 
-## Progressive Formalization
+**Step 4: Validate Consistency**
 
-### Phase 1: Discovery (Weeks 1-3)
-- Skills output to `skill_data` JSON
-- Everything is flexible
-- Rapid iteration
+Say:
+> "Check if everything is consistent"
 
-### Phase 2: Stabilization (Week 4+)
-When a field is stable, promote it:
-```bash
-npm run migrate:promote <field-name>
-```
+Or invoke:
+> `/contract-validator` Full contract validation
 
-This generates and optionally applies:
-- SQL migration
-- TypeScript type updates
-- Backfill logic
+You'll get a report showing:
+- ✅ What's aligned
+- ⚠️ What needs attention
+- 💡 Improvement suggestions
 
-### Phase 3: Hardening (As Needed)
-- Promoted fields become API contracts
-- Skills can still add new fields to `skill_data`
-- Best of both worlds
+---
 
 ## Project Structure
 
 ```
-├── .claude/
-│   └── skills/              # Skill definitions (markdown)
-│       ├── domain-discovery.md
-│       ├── schema-evolution.md
-│       ├── ui-bootstrap.md  # Auto-initialize UI
-│       └── [your-skills].md
-├── src/
-│   ├── skills/              # Skill executor (reusable)
-│   ├── schema/              # TypeScript types
-│   ├── data/                # Database
-│   └── migrations/          # Generated migrations
-├── templates/
-│   └── ui/                  # UI template (React + Sailwind)
-├── examples/                # Reference implementation
-└── AGENTS.md                # AI agent guidance for UI development
+skills-first-starter/
+├── schema/
+│   ├── api-contract.yaml          # OpenAPI 3.1 schema (source of truth)
+│   └── evolution-log.md           # Tracks schema changes over time
+├── concept-model/
+│   ├── domain-model.md            # Entities, relationships, business rules
+│   └── behavior-model.md          # Workflows, state transitions, interactions
+├── api/
+│   ├── types/                     # Generated TypeScript types
+│   └── mock-server/               # Mock API implementation
+├── templates/ui/
+│   └── src/
+│       ├── pages/                 # React prototype pages
+│       └── ...                    # Standard Vite + React setup
+├── .claude/skills/
+│   ├── schema-evolution.md        # Maintains API schema
+│   ├── concept-sync.md            # Maintains concept docs
+│   └── contract-validator.md      # Validates consistency
+└── docs/
+    └── workflow-walkthrough.md    # Detailed walkthrough
 ```
 
-## Core Concepts
+---
 
-### Skills Are Domain-Agnostic
-The executor (`src/skills/`) works for any domain. Only the skill markdown files change.
+## Core Workflow
 
-### Types Guide Evolution
-Your `schema/types.ts` defines the aspirational state. The database evolves toward it.
+### The Contract-First Loop
 
-### Promote When Ready
-Fields start in `skill_data` JSON. Promote to columns when you need to query/filter/sort.
+```
+1. Build Prototype
+      ↓
+2. AI Detects Schema Need
+      ↓
+3. Review & Approve Schema Change
+      ↓
+4. AI Updates Artifacts
+      ↓
+5. Validate Consistency
+      ↓
+   Continue Building
+```
 
-## Example: Ticket System
+### Skills Reference
 
-See `examples/ticket-system/` for a complete reference implementation.
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| **schema-evolution** | Keeps API schema aligned with prototype | Prototype adds fields, endpoints, or filters |
+| **concept-sync** | Keeps domain/behavior docs synchronized | After schema changes or workflow additions |
+| **contract-validator** | Checks consistency across all artifacts | Before handoff or periodically during development |
 
-## Next Steps
+### Typical Development Session
 
-1. Run `npm run skill:discover` to generate your first skills
-2. Test them with `npm run cli`
-3. (Optional) Ask your agent to build UI pages - it will bootstrap the UI automatically
-4. Iterate on skills until behavior feels right
-5. Promote stable fields with `npm run migrate:promote`
-6. Repeat
+```bash
+# 1. Start with validated contract
+/contract-validator "Pre-session validation"
+
+# 2. Build prototype features
+# (Add priority filtering, comments, bulk updates, etc.)
+
+# 3. Update schema as you go
+/schema-evolution "Add priority filtering to tickets"
+
+# 4. Sync concept model
+/concept-sync "Update docs for priority filtering"
+
+# 5. Validate before wrapping up
+/contract-validator "Final validation"
+```
+
+---
 
 ## Learn More
 
-- [Progressive Formalization Guide](./docs/progressive-formalization.md)
-- [Skill Writing Guide](./docs/writing-skills.md)
-- [Migration Guide](./docs/migrations.md)
+### Documentation
+
+- **[Workflow Walkthrough](./docs/workflow-walkthrough.md)** - Complete example with iterations
+- **[Schema Evolution Guide](./docs/schema-evolution.md)** - How to evolve your API contract
+- **[Concept Modeling Guide](./docs/concept-modeling.md)** - Best practices for domain/behavior docs
+
+### Example Use Cases
+
+This approach works well for:
+- **Internal tools**: Prototyping admin dashboards, management interfaces
+- **API-driven apps**: When you need clear contracts between frontend and backend teams
+- **Product validation**: Rapid prototyping with built-in documentation
+- **Design systems**: Exploring interaction patterns while maintaining schema
+
+### Adapting to Your Domain
+
+1. **Replace the example**: Delete the ticketing example, start fresh
+2. **Define initial schema**: Create minimal API contract for your domain
+3. **Build prototype**: Use generated types, keep it simple
+4. **Let skills help**: As you add features, schema-evolution keeps contract aligned
+5. **Iterate**: Build → detect → approve → update → validate → repeat
+
+---
+
+## Why This Approach?
+
+### Traditional: Prototype → Reverse Engineer
+
+```
+Week 1-2: Build prototype with mock data
+Week 3: Document "what we built"
+Week 4: Developers interpret prototype
+Week 5+: Back-and-forth to clarify intent
+```
+
+### Schema-First: Prototype + Contract Together
+
+```
+Week 1-2: Build prototype (AI maintains schema in parallel)
+Week 3: Handoff complete schema + concept model + working prototype
+Week 4+: Developers implement (clear contract, fewer questions)
+```
+
+**Key Difference:** Contract maintenance happens **during** prototyping, not **after**.
+
+---
+
+## Technology Stack
+
+### Prototype UI
+- **React 19** + **TypeScript** + **Vite**
+- **Sailwind Components** - SAIL-like component library
+- **Aurora Color Palette** - Pre-configured design system
+
+### Contract Layer
+- **OpenAPI 3.1** - Industry-standard API schema
+- **TypeScript Types** - Generated from schema
+- **Mock Server** - Simple in-memory API for prototyping
+
+### Skills (AI Automation)
+- **schema-evolution** - Schema change detection and proposal
+- **concept-sync** - Documentation synchronization
+- **contract-validator** - Consistency checking
+
+---
+
+## Getting Help
+
+- **Issues**: Report bugs or request features via GitHub Issues
+- **Discussions**: Share your use cases and ask questions
+- **Examples**: See `docs/workflow-walkthrough.md` for detailed examples
+
+---
+
+## Contributing
+
+This template is designed to be adapted to your needs. Key customization points:
+
+1. **Your domain schema**: Replace ticketing example with your entities
+2. **Your UI patterns**: Adapt React components to your design system
+3. **Your workflows**: Extend skills for domain-specific automation
+
+---
+
+## License
+
+MIT - Use freely for prototyping and production projects.
+
+---
+
+## Quick Reference
+
+### Common Commands
+
+```bash
+# Start prototype UI
+cd templates/ui && npm run dev
+
+# Validate contract consistency
+# In Claude Code: /contract-validator
+
+# Update schema after prototype changes
+# In Claude Code: /schema-evolution [description]
+
+# Sync concept model with schema
+# In Claude Code: /concept-sync [what changed]
+```
+
+### Key Files
+
+- 📄 [schema/api-contract.yaml](./schema/api-contract.yaml) - Your API contract
+- 📖 [concept-model/domain-model.md](./concept-model/domain-model.md) - Domain concepts
+- 🔄 [concept-model/behavior-model.md](./concept-model/behavior-model.md) - Workflows
+- 📝 [schema/evolution-log.md](./schema/evolution-log.md) - Change history
+
+---
+
+**Ready to prototype with confidence?** Start with the [workflow walkthrough](./docs/workflow-walkthrough.md) to see the full process in action.
