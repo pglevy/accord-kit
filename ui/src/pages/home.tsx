@@ -24,35 +24,39 @@ export default function Home() {
 
           <RichTextDisplayField
             value={[
-              "This is a starter template for building UIs with Sailwind components.",
+              "This is a clean starter template for Schema-First prototyping.",
               "",
-              "The UI integrates with your Skills-First backend through the API layer.",
-              "All components use the Aurora color palette and SAIL-like parameter conventions."
+              "Build your prototype while AI maintains your API contract and concept model automatically.",
+              "Uses Sailwind components with Aurora color palette."
             ]}
             marginBelow="MORE"
           />
 
           <HeadingField
-            text="Example Pages"
+            text="Getting Started"
             size="MEDIUM"
             headingTag="H3"
             marginBelow="STANDARD"
           />
 
-          <div className="space-y-3">
-            <ButtonWidget
-              label="View Tickets (Schema-First Example)"
-              style="SOLID"
-              color="ACCENT"
-              onClick={() => navigate('/tickets')}
-            />
-            <ButtonWidget
-              label="View Example Form"
-              style="OUTLINE"
-              color="ACCENT"
-              onClick={() => navigate('/example-form')}
-            />
-          </div>
+          <RichTextDisplayField
+            value={[
+              "1. Define your schema in schema/api-contract.yaml",
+              "2. Create pages for your domain",
+              "3. Generate types from your schema",
+              "4. Build your prototype using those types",
+              "",
+              "See examples/ticketing-system/ for a complete working example!"
+            ]}
+            marginBelow="MORE"
+          />
+
+          <ButtonWidget
+            label="View Example Form"
+            style="OUTLINE"
+            color="ACCENT"
+            onClick={() => navigate('/example-form')}
+          />
         </CardLayout>
 
         <div className="mt-6">
@@ -66,11 +70,11 @@ export default function Home() {
 
             <RichTextDisplayField
               value={[
-                "1. Update api.ts with your domain types and endpoints",
-                "2. Create pages in src/pages/ using Sailwind components",
-                "3. Add routes to App.tsx",
-                "4. Connect forms and actions to your skills backend",
-                "5. Run npm run build to validate before deployment"
+                "1. Explore examples/ticketing-system/ to see the workflow",
+                "2. Define your initial schema in schema/api-contract.yaml",
+                "3. Generate types from your schema",
+                "4. Create pages for your domain",
+                "5. Use /schema-evolution, /concept-sync, /contract-validator skills as you build"
               ]}
             />
           </CardLayout>

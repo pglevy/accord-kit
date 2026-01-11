@@ -56,86 +56,74 @@ Instead of reverse-engineering your prototype, developers get:
 
 ## Quick Start
 
-### 1. Clone and Explore the Example
+### Option A: Run the Ticketing Example (Recommended First Step)
+
+See how the Schema-First workflow works with a complete example:
 
 ```bash
 # Clone this repo
 git clone <your-repo-url>
 cd skills-first-starter
 
-# Install dependencies for UI prototype
-cd templates/ui
-npm install
+# Navigate to the ticketing example
+cd examples/ticketing-system/ui
 
-# Start the example
+# Install and run
+npm install
 npm run dev
 ```
 
-Visit [http://localhost:5173/tickets](http://localhost:5173/tickets) to see the ticketing system example.
+Visit [http://localhost:5173](http://localhost:5173) to see the working ticketing system.
 
-### 2. Review the Artifacts
+Explore the example artifacts:
+- [examples/ticketing-system/schema/](./examples/ticketing-system/schema/) - Complete API contract
+- [examples/ticketing-system/concept-model/](./examples/ticketing-system/concept-model/) - Domain and behavior docs
+- [examples/ticketing-system/ui/](./examples/ticketing-system/ui/) - Working React prototype
 
-**API Contract:**
-- [schema/api-contract.yaml](./schema/api-contract.yaml) - OpenAPI 3.1 schema defining Ticket API
+See the [example README](./examples/ticketing-system/README.md) for more details.
 
-**Concept Model:**
-- [concept-model/domain-model.md](./concept-model/domain-model.md) - Ticket entity, attributes, business rules
-- [concept-model/behavior-model.md](./concept-model/behavior-model.md) - Workflows and state transitions
+---
 
-**Generated Artifacts:**
-- [api/types/index.ts](./api/types/index.ts) - TypeScript types from schema
-- [api/mock-server/tickets.ts](./api/mock-server/tickets.ts) - Mock API implementing the contract
+### Option B: Start Your Own Project
 
-**Prototype:**
-- [templates/ui/src/pages/tickets.tsx](./templates/ui/src/pages/tickets.tsx) - React UI using generated types
+Use the clean template for your domain:
 
-### 3. Try Making a Change
+```bash
+# From the root of the repo
+cd ui
+npm install
+npm run dev
+```
 
-Let's add a priority field to tickets:
+The top-level folders are clean placeholders:
+- `schema/` - Empty API contract (replace with your domain)
+- `concept-model/` - Template docs (fill in your entities/workflows)
+- `api/` - Empty types and mock server (generate from your schema)
+- `ui/` - Clean React starter (build your prototype)
 
-**Step 1: Update the Prototype**
+**Next Steps:**
+1. Define your initial schema in [schema/api-contract.yaml](./schema/api-contract.yaml)
+2. Start building your prototype in [ui/src/pages/](./ui/src/pages/)
+3. Use the skills (schema-evolution, concept-sync, contract-validator) to keep artifacts aligned
 
-Edit [templates/ui/src/pages/tickets.tsx](./templates/ui/src/pages/tickets.tsx) and add a priority dropdown to the create form.
+---
 
-**Step 2: Run Schema Evolution**
+### Try the Skills
 
-In Claude Code, say:
-> "I added a priority field to the ticket form. Can you update the schema?"
+Whether using the example or your own project, you can invoke the contract-maintenance skills:
 
-Or explicitly invoke:
-> `/schema-evolution` Add priority field to tickets
+```bash
+# Detect schema needs and propose updates
+/schema-evolution "Add priority field to tickets"
 
-The AI will:
-- Analyze the change
-- Propose schema updates (adding priority enum)
-- Update [schema/api-contract.yaml](./schema/api-contract.yaml)
-- Log the change in [schema/evolution-log.md](./schema/evolution-log.md)
+# Keep concept model synchronized
+/concept-sync "Update docs for priority field"
 
-**Step 3: Sync Concept Model**
+# Validate consistency across artifacts
+/contract-validator "Full contract validation"
+```
 
-Say:
-> "Update the concept model for the priority field"
-
-Or invoke:
-> `/concept-sync` Update concept model for priority
-
-The AI will:
-- Add priority to domain-model.md
-- Update business rules
-- Add to domain vocabulary
-
-**Step 4: Validate Consistency**
-
-Say:
-> "Check if everything is consistent"
-
-Or invoke:
-> `/contract-validator` Full contract validation
-
-You'll get a report showing:
-- ✅ What's aligned
-- ⚠️ What needs attention
-- 💡 Improvement suggestions
+See [docs/workflow-walkthrough.md](./docs/workflow-walkthrough.md) for a complete walkthrough with examples.
 
 ---
 
@@ -143,26 +131,38 @@ You'll get a report showing:
 
 ```
 skills-first-starter/
-├── schema/
-│   ├── api-contract.yaml          # OpenAPI 3.1 schema (source of truth)
-│   └── evolution-log.md           # Tracks schema changes over time
-├── concept-model/
-│   ├── domain-model.md            # Entities, relationships, business rules
-│   └── behavior-model.md          # Workflows, state transitions, interactions
-├── api/
-│   ├── types/                     # Generated TypeScript types
-│   └── mock-server/               # Mock API implementation
-├── templates/ui/
+├── schema/                         # YOUR API contract (clean template)
+│   ├── api-contract.yaml           # OpenAPI 3.1 schema
+│   └── evolution-log.md            # Schema change history
+├── concept-model/                  # YOUR domain docs (clean template)
+│   ├── domain-model.md             # Entities, relationships, business rules
+│   └── behavior-model.md           # Workflows, state transitions
+├── api/                            # Generated artifacts (empty until you generate)
+│   ├── types/                      # TypeScript types from schema
+│   └── mock-server/                # Mock API implementation
+├── ui/                             # YOUR prototype UI (clean starter)
 │   └── src/
-│       ├── pages/                 # React prototype pages
-│       └── ...                    # Standard Vite + React setup
-├── .claude/skills/
-│   ├── schema-evolution.md        # Maintains API schema
-│   ├── concept-sync.md            # Maintains concept docs
-│   └── contract-validator.md      # Validates consistency
-└── docs/
-    └── workflow-walkthrough.md    # Detailed walkthrough
+│       ├── pages/                  # React pages for your domain
+│       └── ...                     # Vite + React + Sailwind setup
+├── .claude/skills/                 # Contract-maintenance skills (ready to use)
+│   ├── schema-evolution.md         # Detects changes, proposes schema updates
+│   ├── concept-sync.md             # Keeps docs synchronized
+│   └── contract-validator.md       # Validates consistency
+├── examples/                       # Complete working examples
+│   └── ticketing-system/           # Ticketing app example (run this first!)
+│       ├── schema/                 # Example API contract
+│       ├── concept-model/          # Example domain docs
+│       ├── api/                    # Example types and mock API
+│       └── ui/                     # Example React prototype
+└── docs/                           # Documentation
+    ├── workflow-walkthrough.md     # Step-by-step guide
+    ├── comparison.md               # Schema-First vs Traditional
+    └── writing-skills.md           # How to write contract-maintenance skills
 ```
+
+**Key Distinction:**
+- **Top-level folders** = Your project (clean placeholders)
+- **examples/** = Working examples to learn from (ticketing system)
 
 ---
 

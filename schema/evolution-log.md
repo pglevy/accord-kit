@@ -3,6 +3,7 @@
 This log tracks changes to the API contract as prototypes evolve.
 
 ## Format
+
 Each entry includes:
 - **Date**: When the change was made
 - **Trigger**: What prompted the change (prototype need, user feedback, etc.)
@@ -12,28 +13,12 @@ Each entry includes:
 
 ---
 
-## 2026-01-11 - Initial Schema
+## Getting Started
 
-**Trigger**: Starting ticketing app prototype
+When you make your first schema change, add an entry here following this template:
 
-**Change**: Created initial schema with basic ticket CRUD operations
-- Endpoints: GET /tickets, POST /tickets, GET /tickets/{id}, PATCH /tickets/{id}
-- Core entity: Ticket with id, title, description, status, assignee, timestamps
-- Status enum: open, in_progress, closed
-
-**Rationale**: Minimal viable schema to support basic ticket management prototype
-
-**Impact**:
-- ✅ Created api-contract.yaml
-- ⏳ Concept model to be created
-- ⏳ Types to be generated
-- ⏳ Mock API to be generated
-
----
-
-## Template for Future Entries
-
-**Date**: YYYY-MM-DD
+```markdown
+## YYYY-MM-DD - [Brief Title]
 
 **Trigger**: [What prompted this change]
 
@@ -46,4 +31,11 @@ Each entry includes:
 - [ ] api-contract.yaml updated
 - [ ] concept-model updated
 - [ ] types regenerated
-- [ ] mock API regenerated
+- [ ] mock API updated
+```
+
+---
+
+## Example
+
+See [examples/ticketing-system/schema/evolution-log.md](../../examples/ticketing-system/schema/evolution-log.md) for a complete example of how to track schema evolution.
