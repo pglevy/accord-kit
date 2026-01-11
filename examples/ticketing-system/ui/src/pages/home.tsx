@@ -52,10 +52,10 @@ export default function Home() {
           />
 
           <ButtonWidget
-            label="View Example Form"
-            style="OUTLINE"
+            label="View Tickets Example"
+            style="SOLID"
             color="ACCENT"
-            onClick={() => navigate('/example-form')}
+            onClick={() => navigate('/tickets')}
           />
         </CardLayout>
 

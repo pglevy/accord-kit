@@ -4,12 +4,11 @@ import {
   HeadingField,
   CardLayout,
   ButtonWidget,
-  TextInputField,
-  TextAreaField,
-  SelectField,
+  TextField,
+  DropdownField,
   RichTextDisplayField,
 } from '@pglevy/sailwind'
-import type { Ticket, CreateTicketRequest, TicketStatus } from '../../../api/types'
+import type { Ticket, CreateTicketRequest, TicketStatus } from '@api/types'
 
 /**
  * Tickets Page - Example Prototype
@@ -142,17 +141,12 @@ export default function Tickets() {
         <CardLayout padding="MORE" showShadow={true}>
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex-1">
-              <SelectField
+              <DropdownField
                 label="Filter by Status"
-                name="status-filter"
+                choiceLabels={['All Tickets', 'Open', 'In Progress', 'Closed']}
+                choiceValues={['all', 'open', 'in_progress', 'closed']}
                 value={filter}
-                onChange={(e) => setFilter(e.target.value as TicketStatus | 'all')}
-                options={[
-                  { value: 'all', label: 'All Tickets' },
-                  { value: 'open', label: 'Open' },
-                  { value: 'in_progress', label: 'In Progress' },
-                  { value: 'closed', label: 'Closed' },
-                ]}
+                onChange={(value) => setFilter(value as TicketStatus | 'all')}
               />
             </div>
             <div className="pt-6">
@@ -175,30 +169,31 @@ export default function Tickets() {
                 marginBelow="STANDARD"
               />
 
-              <TextInputField
+              <TextField
                 label="Title"
-                name="title"
                 value={newTicket.title}
-                onChange={(e) => setNewTicket({ ...newTicket, title: e.target.value })}
+                onChange={(value) => setNewTicket({ ...newTicket, title: value })}
                 required={true}
                 marginBelow="STANDARD"
               />
 
-              <TextAreaField
-                label="Description"
-                name="description"
-                value={newTicket.description}
-                onChange={(e) => setNewTicket({ ...newTicket, description: e.target.value })}
-                required={true}
-                rows={4}
-                marginBelow="STANDARD"
-              />
+              <div className="mb-4">
+                <label className="block text-base font-medium mb-1.5">
+                  Description <span className="text-red-700">*</span>
+                </label>
+                <textarea
+                  value={newTicket.description}
+                  onChange={(e) => setNewTicket({ ...newTicket, description: e.target.value })}
+                  required={true}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-sm bg-white text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
 
-              <TextInputField
+              <TextField
                 label="Assignee (optional)"
-                name="assignee"
                 value={newTicket.assignee || ''}
-                onChange={(e) => setNewTicket({ ...newTicket, assignee: e.target.value || null })}
+                onChange={(value) => setNewTicket({ ...newTicket, assignee: value || null })}
                 marginBelow="MORE"
               />
 

@@ -40,8 +40,9 @@ export default function ExampleForm() {
         {error && (
           <div className="mb-6">
             <MessageBanner
-              message={error}
-              type="ERROR"
+              primaryText={error}
+              backgroundColor="ERROR"
+              icon="error"
             />
           </div>
         )}
@@ -55,7 +56,7 @@ export default function ExampleForm() {
               required={true}
               labelPosition="ABOVE"
               marginBelow="STANDARD"
-              helpText="Enter a name for your entity"
+              instructions="Enter a name for your entity"
             />
 
             <TextField
@@ -65,7 +66,7 @@ export default function ExampleForm() {
               required={false}
               labelPosition="ABOVE"
               marginBelow="MORE"
-              helpText="Optional description"
+              instructions="Optional description"
             />
 
             <div className="flex gap-2 justify-end">
