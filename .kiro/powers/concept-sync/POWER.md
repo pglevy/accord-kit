@@ -1,3 +1,11 @@
+---
+name: "concept-sync"
+displayName: "Concept Sync"
+description: "Keep your concept model documentation synchronized with your evolving API schema and prototypes. Syncs domain and behavior models with schema changes to maintain consistency between technical implementation and business concepts."
+keywords: ["concept", "documentation", "schema", "sync", "domain", "behavior", "model"]
+author: "Philip Levy"
+---
+
 # Concept Sync Power
 
 **Keep your concept model documentation synchronized with your evolving API schema and prototypes.**

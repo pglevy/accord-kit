@@ -1,3 +1,11 @@
+---
+name: "contract-validator"
+displayName: "Contract Validator"
+description: "Ensure consistency across all product artifacts including API schema, concept model, prototypes, and generated code. Validates cross-artifact consistency and identifies discrepancies before they become problems."
+keywords: ["validation", "consistency", "contract", "schema", "prototype", "documentation"]
+author: "Philip Levy"
+---
+
 # Contract Validator Power
 
 **Ensure consistency across all product artifacts: API schema, concept model, prototypes, and generated code.**

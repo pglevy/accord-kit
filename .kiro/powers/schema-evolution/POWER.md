@@ -1,3 +1,11 @@
+---
+name: "schema-evolution"
+displayName: "Schema Evolution"
+description: "Keep your API contract synchronized with UI prototype changes. Proactively detects schema needs from prototype code and proposes OpenAPI contract updates to maintain alignment."
+keywords: ["schema", "api", "openapi", "evolution", "prototype", "contract"]
+author: "Philip Levy"
+---
+
 # Schema Evolution Power
 
 **Keep your API contract synchronized with UI prototype changes.**
