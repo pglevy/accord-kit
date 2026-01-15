@@ -1,30 +1,28 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HeadingField, CardLayout, TextField, ButtonWidget, MessageBanner } from '@pglevy/sailwind'
-import { createEntity } from '../api'
 
+/**
+ * Example Form Page
+ *
+ * This demonstrates the form pattern using Sailwind components.
+ * Wire up your API client (see src/api.ts) once you have your schema defined.
+ */
 export default function ExampleForm() {
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
-    setIsSubmitting(true)
 
-    try {
-      // This calls the backend API, which executes a skill
-      await createEntity({ name, description })
-      // Navigate back to home on success
-      navigate('/')
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
-    } finally {
-      setIsSubmitting(false)
-    }
+    // TODO: Replace with actual API call once schema is defined
+    // Example:
+    // await createEntity({ name, description })
+
+    console.log('Form submitted:', { name, description })
+    setSubmitted(true)
   }
 
   return (
@@ -37,11 +35,12 @@ export default function ExampleForm() {
           marginBelow="MORE"
         />
 
-        {error && (
+        {submitted && (
           <div className="mb-6">
             <MessageBanner
-              message={error}
-              type="ERROR"
+              primaryText="Form submitted! (Demo only - wire up your API in src/api.ts)"
+              backgroundColor="POSITIVE"
+              icon="success"
             />
           </div>
         )}
@@ -55,7 +54,7 @@ export default function ExampleForm() {
               required={true}
               labelPosition="ABOVE"
               marginBelow="STANDARD"
-              helpText="Enter a name for your entity"
+              instructions="Enter a name for your entity"
             />
 
             <TextField
@@ -65,23 +64,21 @@ export default function ExampleForm() {
               required={false}
               labelPosition="ABOVE"
               marginBelow="MORE"
-              helpText="Optional description"
+              instructions="Optional description"
             />
 
             <div className="flex gap-2 justify-end">
               <ButtonWidget
-                label={isSubmitting ? "Creating..." : "Create"}
+                label="Create"
                 style="SOLID"
                 color="ACCENT"
                 submit={true}
-                disabled={isSubmitting}
               />
               <ButtonWidget
                 label="Cancel"
                 style="OUTLINE"
                 color="SECONDARY"
                 onClick={() => navigate('/')}
-                disabled={isSubmitting}
               />
             </div>
           </form>
@@ -89,10 +86,9 @@ export default function ExampleForm() {
 
         <div className="mt-6 p-4 bg-white rounded-lg shadow">
           <p className="text-sm text-gray-700">
-            <strong>Note:</strong> This form demonstrates the integration pattern.
-            When submitted, it calls <code className="bg-gray-100 px-1 rounded">createEntity()</code> in
-            api.ts, which posts to your backend API. The backend then executes the appropriate
-            skill and returns the result.
+            <strong>Note:</strong> This form demonstrates the UI pattern.
+            To make it functional, define your schema and wire up the API client in
+            <code className="bg-gray-100 px-1 rounded mx-1">src/api.ts</code>.
           </p>
         </div>
       </div>

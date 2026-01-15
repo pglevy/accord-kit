@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen bg-blue-50">
       <div className="container mx-auto px-8 py-8">
         <HeadingField
-          text="Skills-First Starter UI"
+          text="Schema-First Starter"
           size="LARGE"
           headingTag="H1"
           marginBelow="MORE"
