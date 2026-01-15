@@ -73,15 +73,15 @@ import './index.css'
 These can be safely removed - they're from the old progressive formalization approach:
 
 ### Remove Entirely:
-1. `src/` - Old backend TypeScript implementation
-2. `package.json` (root) - Backend package.json
-3. `tsconfig.json` (root) - Backend TypeScript config
-4. `.env.example` - Backend environment vars
-5. `examples/ticket-system/` - OLD example (hyphen, not ticketing-system)
-6. `docs/archived/` - Already archived, can delete
+1. ~~`src/` - Old backend TypeScript implementation~~
+2. ~~`package.json` (root) - Backend package.json~~
+3. ~~`tsconfig.json` (root) - Backend TypeScript config~~
+4. ~~`.env.example` - Backend environment vars~~
+5. ~~`examples/ticket-system/` - OLD example (hyphen, not ticketing-system)~~
+6. ~~`docs/archived/` - Already archived, can delete~~
 7. `AGENTS.md` - Documentation for old approach
-8. `PROJECT_SUMMARY.md` - Summary of old project
-9. `QUICK_REFERENCE.md` - Quick ref for old approach
+8. ~~`PROJECT_SUMMARY.md` - Summary of old project~~
+9. ~~`QUICK_REFERENCE.md` - Quick ref for old approach~~
 
 ### Keep:
 - `.claude/skills/` - NEW contract-maintenance skills
@@ -89,6 +89,22 @@ These can be safely removed - they're from the old progressive formalization app
 - `examples/ticketing-system/` - NEW example
 - `docs/` (except archived/) - Updated docs
 - `README.md` - Updated for new approach
+
+### Things to clarify from Cleanup List
+
+- I think these skills are from the old approach and we can remove them:
+   - `.claude/skills/ui-bootstrap.md`
+   - `.claude/skills/domain-discovery.md`
+- `.claude/skills/schema-evolution.md` was modified from the original approach and is still relevant
+
+## TODO after cleanup
+
+- add placeholder relationship entity diagram in top-level `concept-model` folder
+- completely redo AGENTS.md
+- double check README.md is up-to-date with new approach
+- check for ts errors in `examples/ticketing-system/ui`
+- make sure .gitignore up-to-date
+
 
 ---
 
