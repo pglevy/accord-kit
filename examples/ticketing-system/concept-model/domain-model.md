@@ -51,6 +51,11 @@ Currently a single entity system. Future relationships may include:
 
 ---
 
+## Visual Representations
+
+- [Entity Relationship Diagram](./entity-relationship-diagram.md) - Visual model of entities and relationships
+- [Behavior Model](./behavior-model.md) - Detailed interaction patterns and workflows
+
 ## Key Behaviors
 
 (See [behavior-model.md](./behavior-model.md) for detailed interaction patterns)
