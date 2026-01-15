@@ -218,8 +218,8 @@ skills-first-starter/
 ### Documentation
 
 - **[Workflow Walkthrough](./docs/workflow-walkthrough.md)** - Complete example with iterations
-- **[Schema Evolution Guide](./docs/schema-evolution.md)** - How to evolve your API contract
-- **[Concept Modeling Guide](./docs/concept-modeling.md)** - Best practices for domain/behavior docs
+- **[Comparison: Schema-First vs Traditional](./docs/comparison.md)** - Why this approach works
+- **[Writing Skills Guide](./docs/writing-skills.md)** - How to write contract-maintenance skills
 
 ### Example Use Cases
 
@@ -311,7 +311,7 @@ MIT - Use freely for prototyping and production projects.
 
 ```bash
 # Start prototype UI
-cd templates/ui && npm run dev
+cd ui && npm run dev
 
 # Validate contract consistency
 # In Claude Code: /contract-validator

@@ -9,6 +9,7 @@
 
 ### Documentation
 - ✅ README.md updated to explain template vs example
+- ✅ AGENTS.md rewritten for Schema-First approach
 - ✅ docs/workflow-walkthrough.md - Complete walkthrough
 - ✅ docs/comparison.md - Schema-First vs Traditional
 - ✅ docs/writing-skills.md - Contract-maintenance skills guide
@@ -24,105 +25,51 @@
 - ✅ schema/evolution-log.md - Template for tracking changes
 - ✅ concept-model/domain-model.md - Template with instructions
 - ✅ concept-model/behavior-model.md - Template with instructions
+- ✅ concept-model/entity-relationship-diagram.md - ERD template with Mermaid examples
 - ✅ api/types/README.md - Explains type generation
 - ✅ api/mock-server/README.md - Explains mocking
 - ✅ ui/ - Clean React starter (no ticket references)
 
 ### Example Artifacts
 - ✅ examples/ticketing-system/schema/ - Complete ticket API contract
-- ✅ examples/ticketing-system/concept-model/ - Complete docs
+- ✅ examples/ticketing-system/concept-model/ - Complete docs with ERD
 - ✅ examples/ticketing-system/api/types/ - Generated TypeScript types
 - ✅ examples/ticketing-system/api/mock-server/ - Mock API
-- ✅ examples/ticketing-system/ui/ - React app (npm install works)
+- ✅ examples/ticketing-system/ui/ - React app (builds successfully)
+
+### Cleanup Completed
+- ✅ Removed old backend artifacts (src/, root package.json, tsconfig.json, .env.example)
+- ✅ Removed old example (examples/ticket-system/)
+- ✅ Removed archived docs (docs/archived/)
+- ✅ Removed old project docs (PROJECT_SUMMARY.md, QUICK_REFERENCE.md)
+- ✅ Removed old skills (ui-bootstrap.md, domain-discovery.md)
+- ✅ Rewrote AGENTS.md for Schema-First approach
+- ✅ Fixed README.md broken links and incorrect paths
+- ✅ Updated .gitignore with modern patterns
 
 ---
 
-## ⚠️ Needs Fixing
+## Current State
 
-### Ticketing Example Issues
-1. **Import errors in tickets.tsx** - Using wrong Sailwind component names (TextInputField, TextAreaField, SelectField don't exist)
-   - Should use: `TextField` for all text inputs
-   - Need to replace SelectField with native `<select>` or simplify UI
+**Template is ready to use.** Users can:
 
-2. **TypeScript path resolution** - Types import works at runtime but TypeScript can't resolve during build
-   - May need tsconfig paths configuration
-   - Or explicit .ts extension in import
-
-3. **Missing index.css** - Main.tsx imports './index.css' which doesn't exist
-   - Need to create or remove import
-
-4. **Sailwind API mismatches** - example-form.tsx uses props that don't exist (helpText, message on MessageBanner)
-
-### Quick Fixes Needed
-```typescript
-// In tickets.tsx, replace:
-TextInputField → TextField
-TextAreaField → TextField (with rows prop)
-SelectField → <select> element or simplify to TextField
-
-// In main.tsx, remove or create:
-import './index.css'
-
-// Test build again after fixes
-```
-
----
-
-## 🧹 Cleanup List (Old "Skills-First Backend" Artifacts)
-
-These can be safely removed - they're from the old progressive formalization approach:
-
-### Remove Entirely:
-1. ~~`src/` - Old backend TypeScript implementation~~
-2. ~~`package.json` (root) - Backend package.json~~
-3. ~~`tsconfig.json` (root) - Backend TypeScript config~~
-4. ~~`.env.example` - Backend environment vars~~
-5. ~~`examples/ticket-system/` - OLD example (hyphen, not ticketing-system)~~
-6. ~~`docs/archived/` - Already archived, can delete~~
-7. `AGENTS.md` - Documentation for old approach
-8. ~~`PROJECT_SUMMARY.md` - Summary of old project~~
-9. ~~`QUICK_REFERENCE.md` - Quick ref for old approach~~
-
-### Keep:
-- `.claude/skills/` - NEW contract-maintenance skills
-- `schema/`, `concept-model/`, `api/`, `ui/` - Clean template
-- `examples/ticketing-system/` - NEW example
-- `docs/` (except archived/) - Updated docs
-- `README.md` - Updated for new approach
-
-### Things to clarify from Cleanup List
-
-- I think these skills are from the old approach and we can remove them:
-   - `.claude/skills/ui-bootstrap.md`
-   - `.claude/skills/domain-discovery.md`
-- `.claude/skills/schema-evolution.md` was modified from the original approach and is still relevant
-
-## TODO after cleanup
-
-- add placeholder relationship entity diagram in top-level `concept-model` folder
-- completely redo AGENTS.md
-- double check README.md is up-to-date with new approach
-- check for ts errors in `examples/ticketing-system/ui`
-- make sure .gitignore up-to-date
-
-
----
-
-## Next Steps
-
-1. **Fix ticketing example** - Update tickets.tsx to use correct Sailwind components
-2. **Test example runs** - Verify `cd examples/ticketing-system/ui && npm run dev` works
-3. **Run cleanup** - Remove old backend artifacts
-4. **Final verification** - Ensure template is truly "clone and start"
+1. **Run the example**: `cd examples/ticketing-system/ui && npm install && npm run dev`
+2. **Start their own project**: `cd ui && npm install && npm run dev`
+3. **Use contract-maintenance skills**: `/schema-evolution`, `/concept-sync`, `/contract-validator`
 
 ---
 
 ## Summary
 
-**Big Win:** Successfully pivoted from "Skills-First Backend" to "Schema-First Prototyping"
+**Pivot Complete:** Successfully transitioned from "Skills-First Backend" to "Schema-First Prototyping"
 
 **Core Value:** AI maintains API contract + concept model as you build prototypes
 
-**Template State:** Structure is solid, example needs TypeScript/component fixes
+**Template State:** Ready for use - clean templates + working example
 
-**Est. Time to Working State:** 30-60 minutes to fix component imports and test
+**What Developers Get:**
+- Complete OpenAPI schema defining the API contract
+- Domain and behavior model documentation
+- Entity relationship diagrams
+- Evolution log showing how requirements emerged
+- Working prototype already using the real API shape
