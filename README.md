@@ -1,4 +1,4 @@
-# Schema-First Starter Template
+# Accord Kit
 
 **Keep your API contract and concept model synchronized with your prototypes.**
 
@@ -62,8 +62,8 @@ See how the Schema-First workflow works with a complete example:
 
 ```bash
 # Clone this repo
-git clone <your-repo-url>
-cd skills-first-starter
+git clone https://github.com/pglevy/accord-kit.git
+cd accord-kit
 
 # Navigate to the ticketing example
 cd examples/ticketing-system/ui
@@ -130,7 +130,7 @@ See [docs/workflow-walkthrough.md](./docs/workflow-walkthrough.md) for a complet
 ## Project Structure
 
 ```
-skills-first-starter/
+accord-kit/
 ├── schema/                         # YOUR API contract (clean template)
 │   ├── api-contract.yaml           # OpenAPI 3.1 schema
 │   └── evolution-log.md            # Schema change history
